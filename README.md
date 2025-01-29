@@ -17,6 +17,11 @@ Iterates in any folder it is launched untill the "**depth grade**" is reached. D
 Both Seminario and Seminario_Mod use Guassian 09 formatted .chk (.fchk), but this code works with **BOTH** **Gaussian 09** and **Gaussian 16** .chk.
   If you use G09, you should disable G09 environment forcing (input to Question 2 = no)
   If you use G16, you should enable G09 environment forcing (input to Question 2 = yes)
+
+The result units are, as explained by github.com/aa840 in the "ModSeminario_Py":
+  **Stretching** / **Bond** Parameters **(kcal/mol/Å²)**
+  **Bending** / **Angle** Parameters **(kcal/mol/rad²)**
+  Note that the units match Amber GAFF ForceField
   
 Messages or emails (**richardlopezcorbalan@gmail.com**) will be answered in order to solve any kind of question.
 
