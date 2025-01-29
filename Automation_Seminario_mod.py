@@ -71,7 +71,6 @@ print("\nHave in mind: in the subfolder you want to perform the Seminario method
 depth_degree = int(input("What is the depth degree of the subfolders? [1 - infinite) [folder containing this code = 0] [0 is allowed] : "))
 manage_gaussian = input("Seminario only works with Gaussian 09. Do you want this script to unload Gaussian 16 and load Gaussian 09 automatically? (yes/no): ").strip().lower() == "yes"
 SEMINARIO_PATH = input("Paste the Path to Python_Modified_Seminario_Method: ").strip()
-#SEMINARIO_PATH = f"{SEMINARIO_PATH_INPUT}"
 
 
 
