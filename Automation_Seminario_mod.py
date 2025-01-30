@@ -7,7 +7,7 @@ import subprocess
 # Author: Richard Lopez Corbalan
 # GitHub: github.com/richardloopez
 # Citation: If you use this code, please cite Lopez-Corbalan, R.
-#Seminario_mod Method: github.com/aa840/ModSeminario_Py
+# Seminario_mod Method: github.com/aa840/ModSeminario_Py
 
 def seminarizador(folder, manage_gaussian):
     print(f"Executing seminarizador in: {folder}")
@@ -23,15 +23,14 @@ def seminarizador(folder, manage_gaussian):
     
     chk_file = chk_files[0]
     
-    # Manage Gaussian modules if required
+    # Manage Gaussian modules and environment if required
     if manage_gaussian:
         subprocess.run("module unload gaussian/16", shell=True, executable="/bin/bash", stderr=subprocess.DEVNULL)
         subprocess.run("module load gaussian/09", shell=True, executable="/bin/bash", stderr=subprocess.DEVNULL)
 
-   
-    # Force environment variables for Gaussian 09
-    os.environ["GAUSS_EXEDIR"] = "/usr/local/gaussian/09.D/g09"
-    os.environ["PATH"] = f"{os.environ['GAUSS_EXEDIR']}:{os.environ['PATH']}"
+        # Force environment variables for Gaussian 09
+        os.environ["GAUSS_EXEDIR"] = "/usr/local/gaussian/09.D/g09"
+        os.environ["PATH"] = f"{os.environ['GAUSS_EXEDIR']}:{os.environ['PATH']}"
     
     # Check and execute formchk
     formchk_path = shutil.which("formchk")
@@ -63,16 +62,15 @@ def seminarizador(folder, manage_gaussian):
 print("Warning: This script processes subdirectories to apply the Seminario method.")
 print("You can have as many folders and subfolder as you want.") 
 print("\nHave in mind: in the subfolder you want to perform the Seminario method you need to have:"
-		"\n         -Only one .chk file"
-		"\n         -Only one .log file"
-		"\n         *Presence of other files is not a problem"
-                "\n         *This code has to be launched in the folder [0] (along with the other folders, not subfolders)")
+        "\n         -Only one .chk file"
+        "\n         -Only one .log file"
+        "\n         *Presence of other files is not a problem"
+        "\n         *This code has to be launched in the folder [0] (along with the other folders, not subfolders)")
+
 # Get user input
 depth_degree = int(input("What is the depth degree of the subfolders? [1 - infinite) [folder containing this code = 0] [0 is allowed] : "))
 manage_gaussian = input("Seminario only works with Gaussian 09. Do you want this script to unload Gaussian 16 and load Gaussian 09 automatically? (yes/no): ").strip().lower() == "yes"
 SEMINARIO_PATH = input("Paste the Path to Python_Modified_Seminario_Method: ").strip()
-
-
 
 print("Exploring directories...")
 visited_dirs = set()
