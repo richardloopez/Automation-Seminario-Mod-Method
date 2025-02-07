@@ -3,6 +3,7 @@
 import os
 import shutil
 import subprocess
+import readline
 
 # Author: Richard Lopez Corbalan
 # GitHub: github.com/richardloopez
