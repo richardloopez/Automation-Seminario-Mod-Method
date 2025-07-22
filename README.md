@@ -1,4 +1,5 @@
-#Automation Script for the Modified Seminario Method
+#Automation Script for the Modified Seminario Method#
+
 This script automates the execution of the Modified Seminario Method across multiple directories and subdirectories. It is designed for high-throughput processing of molecular systems, preparing the necessary files and running the Seminario protocol to calculate force constants (bond and angle parameters) from Gaussian output files.
 
 What Does This Script Do?
@@ -86,11 +87,6 @@ Folder Names: Script is not dependent on directory names, only the folder depth 
 Multiple Files: If a folder at the chosen depth contains more than one .chk or .log, it is skipped for your safety.
 
 Environment: If running in an HPC or cluster environment, ensure required modules (Gaussian) are accessible.
-
-The result units are, as explained by github.com/aa840 in the "ModSeminario_Py":  
-  **Stretching** / **Bond** Parameters **(kcal/mol/Å²)**  
-  **Bending** / **Angle** Parameters **(kcal/mol/rad²)**  
-  Note that the units match Amber GAFF ForceField  
   
 Messages or emails (**richardlopezcorbalan@gmail.com**) will be answered in order to solve any kind of question.  
 
