@@ -1,4 +1,4 @@
-#Automation Script for the Modified Seminario Method#
+# Automation Script for the Modified Seminario Method
 
 This script automates the execution of the Modified Seminario Method across multiple directories and subdirectories. It is designed for high-throughput processing of molecular systems, preparing the necessary files and running the Seminario protocol to calculate force constants (bond and angle parameters) from Gaussian output files.
 
