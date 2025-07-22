@@ -1,22 +1,91 @@
-# Automation-Seminario-Mod-Method  
-Automates the execution of the Seminario Mod Method. It allows running the Seminario Mod Method across as many folders and subfolders as desired, with no limitations on folder structure.  
+#Automation Script for the Modified Seminario Method
+This script automates the execution of the Modified Seminario Method across multiple directories and subdirectories. It is designed for high-throughput processing of molecular systems, preparing the necessary files and running the Seminario protocol to calculate force constants (bond and angle parameters) from Gaussian output files.
 
-Iterates in any folder it is launched untill the "**depth grade**" is reached. Depth grade is an input which tells this code where the archives (.log , .chk) are. This code is not completely free of some "folder architecture" because it will only search for the archives in the "last" subfolder of each iteration. Depth grade is a number ranging between [0 - infinite). For example:   
-  First: In the same folder are Automation_Seminario_Mod_Method and i01/i01_A/i01_A_1  
-  
-  depth grade = 0 archives should be in i01/  
-  depth grade = 1 archives should be in i01/i01_A  
-  depth grade = 2 archives should be in i01/i01_A/i01_A_1  
+What Does This Script Do?
+Recursively explores your folder structure up to a user-defined depth (depth_degree), searching for subfolders containing exactly one .chk file and one .log file.
 
-  depth grade = 0 searching will be performed in all iXX/  
-  depth grade = 1 searching will be performed in i0XX/iXX_X  
-  depth grade = 2 searching will be performed in iXX/iXX_X/iXX_X_X  
+Converts .chk files to .fchk format using formchk.
 
-  Note that "X" represents an unknown way to name the path: This code is NOT name-dependent in any sense.  
+Copies, renames, and organizes all inputs required for the Modified Seminario Method, then runs the main protocol (modified_Seminario_method.py) for each system.
 
-Both Seminario and Seminario_Mod use Guassian 09 formatted .chk (.fchk), but this code works with **BOTH** **Gaussian 09** and **Gaussian 16** .chk.  
-  If you use G09, you should disable G09 environment forcing (input to Question 2 = no)  
-  If you use G16, you should enable G09 environment forcing (input to Question 2 = yes)  
+Supports Gaussian 09 and Gaussian 16 .chk files, with optional environment management to ensure Gaussian 09 compatibility.
+
+Results are produced in standard GAFF/Amber units for force field development.
+
+Requirements
+Python 3.
+
+Gaussian utilities available in your environment (formchk) and access to Gaussian module management (gaussian/09 and/or gaussian/16) if needed.
+
+The external repository Python_Modified_Seminario_Method (containing modified_Seminario_method.py).
+
+Run this script from your project root directory—the location containing all system folders to process.
+
+Expected Folder Structure
+Suppose your files are organized as follows:
+
+project_root/
+│
+├── Automation_Seminario_Mod_Method.py
+├── Python_Modified_Seminario_Method/
+│    └── modified_Seminario_method.py
+├── system1/
+│    └── [subdirectories]/
+├── system2/
+│    └── [subdirectories]/
+└── ...
+The script searches for the required .chk and .log in folders located at the depth_degree you specify.
+
+Examples:
+
+depth_degree = 0: looks in system1/, system2/, etc.
+
+depth_degree = 2: searches two subfolder levels deep.
+
+Input File Requirements
+Each processing folder must contain:
+
+Exactly one .chk file (checkpoint from Gaussian 09 or 16).
+
+Exactly one .log file (Gaussian output).
+
+The folder may contain other files, but only one of each of the above is considered—folders with more will be skipped to avoid ambiguity.
+
+How to Use
+From your project root, run:
+
+python Automation_Seminario_Mod_Method.py
+You will be prompted to answer:
+
+Depth Degree (depth_degree): Which subfolder level contains the .chk and .log files?
+
+Gaussian Environment Management: If your checkpoints are from Gaussian 16 and you need to ensure compatibility with the Seminario method, answer yes to switch the environment to Gaussian 09 automatically.
+
+Path to Python_Modified_Seminario_Method: Provide the path to the folder housing modified_Seminario_method.py.
+
+What Happens Internally
+The script runs formchk to convert .chk to .fchk within each relevant subfolder.
+
+A mod_seminario/ligand directory is created for every system, and input files are copied and renamed as lig.fchk, lig.log.
+
+The Modified Seminario Method script (modified_Seminario_method.py) is executed, and results are stored back into each system’s folder structure.
+
+All names are handled generically—no dependency on folder or file naming conventions.
+
+Output
+Results will appear under each processed system’s mod_seminario/ directory.
+
+The result units are, as explained by github.com/aa840 in the "ModSeminario_Py":  
+  **Stretching** / **Bond** Parameters **(kcal/mol/Å²)**  
+  **Bending** / **Angle** Parameters **(kcal/mol/rad²)**  
+  Note that the units match Amber GAFF ForceField  
+
+Additional Notes
+Folder Names: Script is not dependent on directory names, only the folder depth for file discovery.
+
+Multiple Files: If a folder at the chosen depth contains more than one .chk or .log, it is skipped for your safety.
+
+Environment: If running in an HPC or cluster environment, ensure required modules (Gaussian) are accessible.
 
 The result units are, as explained by github.com/aa840 in the "ModSeminario_Py":  
   **Stretching** / **Bond** Parameters **(kcal/mol/Å²)**  
