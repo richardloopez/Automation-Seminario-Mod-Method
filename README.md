@@ -26,15 +26,25 @@ Expected Folder Structure
 Suppose your files are organized as follows:
 
 project_root/
+
 │
+
 ├── Automation_Seminario_Mod_Method.py
+
 ├── Python_Modified_Seminario_Method/
+
 │    └── modified_Seminario_method.py
+
 ├── system1/
+
 │    └── [subdirectories]/
+
 ├── system2/
+
 │    └── [subdirectories]/
+
 └── ...
+
 The script searches for the required .chk and .log in folders located at the depth_degree you specify.
 
 Examples:
